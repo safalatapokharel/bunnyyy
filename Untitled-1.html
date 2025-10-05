@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cute Bunny Mood Website 🐰</title>
+<style>
+  /* General cute pastel theme */
+  body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  /* Add your background image here */
+  background-image: url('https://i.pinimg.com/1200x/62/db/5b/62db5b3ac64e40e2e5e81cd5da8ab33f.jpg');
+  background-size: cover; /* makes it cover whole screen */
+  background-position: left; /* centers the image */
+  background-repeat: no-repeat; /* avoids repeating tiles */
+  display: flex;a
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: content-distribution;
+  text-align: left;
+}
+
+
+  h1 {
+    color: #da94ef;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #890a3d;
+  }
+
+  .bunny {
+    width: 200px;
+    transition: transform 0.3s ease;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .mood-text {
+    font-size: 1.5em;
+    margin-top: 15px;
+    color: #e07afa;
+    transition: all 0.3s ease;
+  }
+
+  button {
+    padding: 12px 25px;
+    margin: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 15px;
+    cursor: grabbing;
+    background-color: #c77dff;
+    color: #fcfcfcd4;
+    box-shadow: 2px 2px #ffb3c6;
+    transition: all 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px #ffb3c6;
+  }
+
+  /* Bunny mood animations */
+  .happy {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .angry {
+    transform: scale(1) rotate(-370deg);
+  }
+
+  /* Cute floating hearts */
+  .heart {
+    position: sticky;
+    width: 30px;
+    height: 30px;
+    background: #ff66b2;
+    transform: rotate(-390deg);
+    animation: floatUp 2s linear forwards;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "normal";
+    position: sticky;
+    width: 30px;
+    height: 30px;
+    background: #ff66b2;
+    border-radius: 50%;
+  }
+
+  .heart::before {
+    top: -15px;
+    left: 10;
+  }
+
+  .heart::after {
+    left: 10;
+    top: -1;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+    100% { transform: translateY(-200px) rotate(-45deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>DO YOU WANT BUNNY?🐰</h1>
+<img src="https://i.pinimg.com/736x/b3/98/9d/b3989db5105b05487c5c2bf0dce0feae.jpg" alt="Cute Bunny" class="bunny" id="bunny">
+<div class="mood-text" id="moodText">Bunny is neutral 🐇</div>
+<button onclick="window.location.href='newpage.html'">Go to New Page</button>
+
+<div>
+  <button onclick="react('yes')">DARE TOUCH THIS BUTTON</button>
+  <button onclick="react('no')">SAY WHATEVERR</button>
+</div>
+
+<script>
+const bunny = document.getElementById('bunny');
+const moodText = document.getElementById('moodText');
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.animationDuration = (1 + Math.random() * 0) + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 2000);
+}
+
+function react(answer) {
+  if(answer === 'yes') {
+    bunny.classList.remove('angry');
+    bunny.classList.add('happy');
+    moodText.textContent = 'Bunny is happy! 🥰';
+    for(let i = 0; i < 5; i++) createHeart();
+  } else {
+    bunny.classList.remove('Say YES 🥰');
+    bunny.classList.add('Say NO 😡');
+    moodText.textContent = 'Bunny is angry! 😡';
+  }
+}
+
+// Bunny wiggle on hover
+bunny.addEventListener('mouseover', () => {
+  bunny.style.transform = 'rotate(370deg) scale(1.05)';
+});
+bunny.addEventListener('mouseout', () => {
+  bunny.classList.contains('happy') ? bunny.style.transform = 'scale(1.1) rotate(5deg)' :
+                                     bunny.classList.contains('angry') ? bunny.style.transform = 'scale(0.9) rotate(-10deg)' :
+                                     bunny.style.transform = 'rotate(0) scale(1)';
+});
+</script>
+
+</body>
+</html>
