@@ -5,44 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cute Bunny Mood Website 🐰</title>
 <style>
-  /* General cute pastel theme */
   body {
-  margin: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  /* Add your background image here */
-  background-image: url('https://i.pinimg.com/1200x/62/db/5b/62db5b3ac64e40e2e5e81cd5da8ab33f.jpg');
-  background-size: cover; /* makes it cover whole screen */
-  background-position: left; /* centers the image */
-  background-repeat: no-repeat; /* avoids repeating tiles */
-  display: flex;a
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: content-distribution;
-  text-align: left;
-}
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
 
+  /* First page */
+  #page1 {
+   background: url("https://i.pinimg.com/736x/d5/9a/22/d59a22a169eb471952f8e456a0c25f8c.jpg") center/cover no-repeat;
+    height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+  }
 
-  h1 {
-    color: #da94ef;
-    font-size: 3em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px #890a3d;
+  /* Second page */
+  #page2 {
+    display: none; /* hidden at first */
+    background: url("https://i.pinimg.com/736x/bb/cd/9d/bbcd9da7895f332edb4825616d23d6a7.jpg") center/cover no-repeat;
+    height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+    color: white;
   }
 
   .bunny {
     width: 200px;
-    transition: transform 0.3s ease;
-    user-select: none;
-    cursor: pointer;
-  }
-
-  .mood-text {
-    font-size: 1.5em;
-    margin-top: 15px;
-    color: #e07afa;
-    transition: all 0.3s ease;
   }
 
   button {
@@ -51,9 +38,9 @@
     font-size: 1.2em;
     border: none;
     border-radius: 15px;
-    cursor: grabbing;
-    background-color: #c77dff;
-    color: #fcfcfcd4;
+    cursor: pointer;
+    background-color: #ffd1dc;
+    color: #ff4d94;
     box-shadow: 2px 2px #ffb3c6;
     transition: all 0.2s ease;
   }
@@ -62,100 +49,45 @@
     transform: scale(1.1);
     box-shadow: 4px 4px #ffb3c6;
   }
-
-  /* Bunny mood animations */
-  .happy {
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  .angry {
-    transform: scale(1) rotate(-370deg);
-  }
-
-  /* Cute floating hearts */
-  .heart {
-    position: sticky;
-    width: 30px;
-    height: 30px;
-    background: #ff66b2;
-    transform: rotate(-390deg);
-    animation: floatUp 2s linear forwards;
-    border-radius: 5px 5px 0 0;
-  }
-
-  .heart::before,
-  .heart::after {
-    content: "normal";
-    position: sticky;
-    width: 30px;
-    height: 30px;
-    background: #ff66b2;
-    border-radius: 50%;
-  }
-
-  .heart::before {
-    top: -15px;
-    left: 10;
-  }
-
-  .heart::after {
-    left: 10;
-    top: -1;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-    100% { transform: translateY(-200px) rotate(-45deg); opacity: 0; }
-  }
 </style>
 </head>
 <body>
 
-<h1>DO YOU WANT BUNNY?🐰</h1>
-<img src="https://i.pinimg.com/736x/b3/98/9d/b3989db5105b05487c5c2bf0dce0feae.jpg" alt="Cute Bunny" class="bunny" id="bunny">
-<div class="mood-text" id="moodText">Bunny is neutral 🐇</div>
-<button onclick="window.location.href='newpage.html'">Go to New Page</button>
+<!-- PAGE 1 -->
+<div id="page1">
+  <h1>DO YOU WANNA CONTINUE BROWSING?(dont dissapoint me)🐰</h1>
+  <img src="https://i.pinimg.com/736x/dd/68/03/dd6803bd24043ba9e8f57f75ed21cf23.jpg" class="bunny" id="bunny">
+  <div id="moodText">Bunny is neutral 🐇</div>
+  <div>
+    <button onclick="goToPage2()">YES</button>
+    <button onclick="reactNo()">NO😡</button>
+  </div>
+</div>
 
-<div>
-  <button onclick="react('yes')">DARE TOUCH THIS BUTTON</button>
-  <button onclick="react('no')">SAY WHATEVERR</button>
+<!-- PAGE 2 -->
+<div id="page2">
+  <h1>Bunny is sooo happy now!🐰💖</h1>
+  <button onclick="backToPage1()">⬅ Go Back because i dont deserve this!!</button>
 </div>
 
 <script>
 const bunny = document.getElementById('bunny');
 const moodText = document.getElementById('moodText');
 
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.style.animationDuration = (1 + Math.random() * 0) + 's';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 2000);
+function reactNo() {
+  bunny.src = "https://i.pinimg.com/736x/61/d2/e2/61d2e2a35a7c07b38e4e06ab2d4d1551.jpg"; // angry bunny
+  moodText.textContent = 'Bunny is angry! 😡';
 }
 
-function react(answer) {
-  if(answer === 'yes') {
-    bunny.classList.remove('angry');
-    bunny.classList.add('happy');
-    moodText.textContent = 'Bunny is happy! 🥰';
-    for(let i = 0; i < 5; i++) createHeart();
-  } else {
-    bunny.classList.remove('Say YES 🥰');
-    bunny.classList.add('Say NO 😡');
-    moodText.textContent = 'Bunny is angry! 😡';
-  }
+function goToPage2() {
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
 }
 
-// Bunny wiggle on hover
-bunny.addEventListener('mouseover', () => {
-  bunny.style.transform = 'rotate(370deg) scale(1.05)';
-});
-bunny.addEventListener('mouseout', () => {
-  bunny.classList.contains('happy') ? bunny.style.transform = 'scale(1.1) rotate(5deg)' :
-                                     bunny.classList.contains('angry') ? bunny.style.transform = 'scale(0.9) rotate(-10deg)' :
-                                     bunny.style.transform = 'rotate(0) scale(1)';
-});
+function backToPage1() {
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page1').style.display = 'block';
+}
 </script>
 
 </body>
